@@ -9,7 +9,7 @@ import ArticlePreview from '../components/article-preview'
 
 class BlogIndex extends React.Component {
   render() {
-    const posts = get(this, 'props.data.allContentfulBlogPost.nodes')
+    const posts = get(this, 'props.data.allContentfulArticlePage.nodes')
 
     return (
       <Layout location={this.props.location}>
@@ -25,12 +25,11 @@ export default BlogIndex
 
 export const pageQuery = graphql`
   query BlogIndexQuery {
-    allContentfulBlogPost(sort: { publishDate: DESC }) {
+    allContentfulArticlePage(sort: { publishDate: DESC }) {
       nodes {
         title
         slug
         publishDate(formatString: "MMMM Do, YYYY")
-        tags
         heroImage {
           gatsbyImage(
             layout: FULL_WIDTH
@@ -39,7 +38,7 @@ export const pageQuery = graphql`
             height: 212
           )
         }
-        description {
+        body {
           raw
         }
       }
